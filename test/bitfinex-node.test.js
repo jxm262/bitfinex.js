@@ -1,8 +1,19 @@
 var bitfinex = require('../lib/bitfinex-node')
+    , request = require('blueagent')
+    , sinon = require('sinon')
     , chai = require('chai')
+    , sinonChai = require('sinon-chai')
     , should = chai.should();
 
+chai.use(sinonChai);
+
 describe('bitfinex', function () {
+
+    var sandbox;    //to clean up stubs on each test
+
+    beforeEach(function () {
+        sandbox = sinon.sandbox.create();
+    });
 
     describe('nonce', function () {
         it('returns ever increasing number not used more than once', function () {
@@ -19,4 +30,22 @@ describe('bitfinex', function () {
         })
     });
 
+    afterEach(function () {
+        sandbox.restore();
+    });
+
+    describe('balances', function(){
+        it('returns promise called with post(url) and set(headers)', function(){
+            var headers = {header_key: 'some_val'};
+            var postSpy = sandbox.spy(request, 'post');
+            var setSpy = sandbox.spy(request.Request.prototype, 'set');
+
+            sandbox.stub(bitfinex, 'authHeaders').returns(headers);
+
+            bitfinex.balances().should.have.property('then');
+            postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/balances');
+            setSpy.should.have.been.calledWith(headers);
+        });
+
+    });
 });

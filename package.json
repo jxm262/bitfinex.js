@@ -25,11 +25,13 @@
   "homepage": "https://github.com/jxm262/bitfinex-node",
   "devDependencies": {
     "chai": "^2.1.2",
-    "mocha": "^2.2.1"
+    "mocha": "^2.2.1",
+    "sinon": "^1.14.1",
+    "sinon-chai": "^2.7.0"
   },
   "dependencies": {
+    "blueagent": "^1.0.0",
     "crypto": "0.0.3",
-    "microtime": "^1.2.0",
-    "superagent": "^1.1.0"
+    "microtime": "^1.2.0"
   }
 }
