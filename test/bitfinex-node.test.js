@@ -124,10 +124,11 @@ describe('bitfinex', function () {
         it('returns promise called with post(/deposit/new) with passed in currency, method, walletName', function () {
             var getSpy = sandbox.spy(request, 'post');
             var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+            var params = {currency: 'usd', method: 'bitcoin', wallet_name: 'deposit'};
 
-            bitfinex.deposit('usd', 'bitcoin', 'deposit').should.have.property('then');
+            bitfinex.deposit(params).should.have.property('then');
             getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/deposit/new');
-            sendSpy.should.have.been.calledWith({currency: 'usd', method: 'bitcoin', wallet_name: 'deposit'});
+            sendSpy.should.have.been.calledWith(params);
         });
     });
 
