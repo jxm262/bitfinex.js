@@ -23,19 +23,19 @@ describe('bitfinex', function () {
         });
     });
 
-    describe('encodePayload(payload)', function(){
-        it('returns stringified json encoded as base 64', function(){
+    afterEach(function () {
+        sandbox.restore();
+    });
+
+    describe('encodePayload(payload)', function () {
+        it('returns stringified json encoded as base 64', function () {
             var payload = {hello: 'world'};
             bitfinex.encodePayload(payload).should.equal('eyJoZWxsbyI6IndvcmxkIn0=');
         })
     });
 
-    afterEach(function () {
-        sandbox.restore();
-    });
-
-    describe('balances', function(){
-        it('returns promise called with post(url) and set(headers)', function(){
+    describe('balances function', function () {
+        it('returns promise called with post(url) and set(headers)', function () {
             var headers = {header_key: 'some_val'};
             var postSpy = sandbox.spy(request, 'post');
             var setSpy = sandbox.spy(request.Request.prototype, 'set');
@@ -46,6 +46,34 @@ describe('bitfinex', function () {
             postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/balances');
             setSpy.should.have.been.calledWith(headers);
         });
-
     });
+
+    describe('ticker function', function () {
+        it('returns promise called with get(/pubticker) with passed in symbol', function () {
+            var getSpy = sandbox.spy(request, 'get');
+
+            bitfinex.ticker('btcusd').should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/pubticker/btcusd');
+        });
+    });
+
+    describe('stats function', function () {
+        it('returns promise called with get(/stats) with passed in symbol', function () {
+            var getSpy = sandbox.spy(request, 'get');
+
+            bitfinex.stats('btcusd').should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/stats/btcusd');
+        });
+    });
+
+    describe('lendbook function', function () {
+        it('returns promise called with get(/lendbook) with passed in currency', function () {
+            var getSpy = sandbox.spy(request, 'get');
+
+            bitfinex.stats('usd').should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/stats/usd');
+        });
+    });
+
+
 });
