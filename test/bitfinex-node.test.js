@@ -136,10 +136,7 @@ describe('bitfinex', function () {
         it('returns promise called with post(/order/new) with passed in valid params', function () {
             var getSpy = sandbox.spy(request, 'post');
             var sendSpy = sandbox.spy(request.Request.prototype, 'send');
-
-            bitfinex.newOrder('btcusd', 100, 280.9, 'bitfinex', 'buy', 'exchange limit', true).should.have.property('then');
-            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/order/new');
-            sendSpy.should.have.been.calledWith({
+            var params = {
                 symbol: 'btcusd',
                 amount: 100,
                 price: 280.9,
@@ -147,7 +144,40 @@ describe('bitfinex', function () {
                 side: 'buy',
                 type: 'exchange limit',
                 isHidden: true
-            });
+            }
+
+            bitfinex.newOrder(params).should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/order/new');
+            sendSpy.should.have.been.calledWith(params);
+        });
+    });
+
+    describe('newMultiOrder function', function () {
+        it('returns promise called with post(/order/new) with passed in valid params', function () {
+            var params = [
+                {
+                    symbol: 'btcusd',
+                    amount: 20,
+                    price: 300.9,
+                    exchange: 'bitfinex',
+                    side: 'sell',
+                    type: 'exchange limit'
+                },
+                {
+                    symbol: 'btcusd',
+                    amount: 20,
+                    price: 300.9,
+                    exchange: 'bitfinex',
+                    side: 'buy',
+                    type: 'exchange limit'
+                }];
+
+            var getSpy = sandbox.spy(request, 'post');
+            var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+
+            bitfinex.newMultiOrder(params).should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/order/new/multi');
+            sendSpy.should.have.been.calledWith(params);
         });
     });
 
