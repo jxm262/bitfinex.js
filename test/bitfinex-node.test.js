@@ -75,7 +75,6 @@ describe('bitfinex', function () {
         });
     });
 
-
     describe('orderbook function', function () {
         it('returns promise called with get(/book) with passed in symbol', function () {
             var getSpy = sandbox.spy(request, 'get');
@@ -85,6 +84,51 @@ describe('bitfinex', function () {
         });
     });
 
+    describe('trades function', function () {
+        it('returns promise called with get(/trades) with passed in symbol', function () {
+            var getSpy = sandbox.spy(request, 'get');
 
+            bitfinex.trades('btcusd').should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/trades/btcusd');
+        });
+    });
+
+    describe('lends function', function () {
+        it('returns promise called with get(/lends) with passed in currency', function () {
+            var getSpy = sandbox.spy(request, 'get');
+
+            bitfinex.lends('usd').should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/lends/usd');
+        });
+    });
+
+    describe('symbols function', function () {
+        it('returns promise called with get(/symbols)', function () {
+            var getSpy = sandbox.spy(request, 'get');
+
+            bitfinex.symbols().should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/symbols');
+        });
+    });
+
+    describe('symbolsDetails function', function () {
+        it('returns promise called with get(/symbols_details)', function () {
+            var getSpy = sandbox.spy(request, 'get');
+
+            bitfinex.symbolsDetails().should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/symbols_details');
+        });
+    });
+
+    describe('deposit function', function () {
+        it('returns promise called with post(/deposit/new) with passed in currency, method, walletName', function () {
+            var getSpy = sandbox.spy(request, 'post');
+            var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+
+            bitfinex.deposit('usd', 'bitcoin', 'deposit').should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/deposit/new');
+            sendSpy.should.have.been.calledWith({currency: 'usd', method: 'bitcoin', wallet_name: 'deposit'});
+        });
+    });
 
 });
