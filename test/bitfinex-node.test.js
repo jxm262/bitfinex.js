@@ -131,4 +131,23 @@ describe('bitfinex', function () {
         });
     });
 
+    describe('newOrder function', function () {
+        it('returns promise called with post(/order/new) with passed in valid params', function () {
+            var getSpy = sandbox.spy(request, 'post');
+            var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+
+            bitfinex.newOrder('btcusd', 100, 280.9, 'bitfinex', 'buy', 'exchange limit', true).should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/order/new');
+            sendSpy.should.have.been.calledWith({
+                symbol: 'btcusd',
+                amount: 100,
+                price: 280.9,
+                exchange: 'bitfinex',
+                side: 'buy',
+                type: 'exchange limit',
+                isHidden: true
+            });
+        });
+    });
+
 });
