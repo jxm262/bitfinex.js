@@ -70,10 +70,21 @@ describe('bitfinex', function () {
         it('returns promise called with get(/lendbook) with passed in currency', function () {
             var getSpy = sandbox.spy(request, 'get');
 
-            bitfinex.stats('usd').should.have.property('then');
-            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/stats/usd');
+            bitfinex.lendbook('usd').should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/lendbook/usd');
         });
     });
+
+
+    describe('orderbook function', function () {
+        it('returns promise called with get(/book) with passed in symbol', function () {
+            var getSpy = sandbox.spy(request, 'get');
+
+            bitfinex.orderbook('btcusd').should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/book/btcusd');
+        });
+    });
+
 
 
 });
