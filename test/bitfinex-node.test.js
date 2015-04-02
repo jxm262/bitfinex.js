@@ -19,13 +19,13 @@ describe('bitfinex', function () {
         sandbox.restore();
     });
 
-    describe('nonce', function () {
-        it('returns ever increasing number not used more than once', function () {
-            //var first = bitfinex.nonce();
-            //var second = bitfinex.nonce();
-            //second.should.be.above(first);
-        });
-    });
+    //describe('nonce', function () {
+    //    it('returns ever increasing number not used more than once', function () {
+    //        //var first = bitfinex.nonce();
+    //        //var second = bitfinex.nonce();
+    //        //second.should.be.above(first);
+    //    });
+    //});
 
     //describe('encodePayload(payload)', function () {
     //    it('returns stringified json encoded as base 64', function () {
@@ -48,14 +48,14 @@ describe('bitfinex', function () {
     //    });
     //});
     //
-    //describe('ticker function', function () {
-    //    it('returns promise called with get(/pubticker) with passed in symbol', function () {
-    //        var getSpy = sandbox.spy(request, 'get');
-    //
-    //        bitfinex.ticker('btcusd').should.have.property('then');
-    //        getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/pubticker/btcusd');
-    //    });
-    //});
+    describe('ticker function', function () {
+        it('returns promise called with get(/pubticker) with passed in symbol', function () {
+            var getSpy = sandbox.spy(request, 'get');
+
+            bitfinex.ticker('btcusd').should.have.property('then');
+            getSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/pubticker/btcusd');
+        });
+    });
     //
     //describe('stats function', function () {
     //    it('returns promise called with get(/stats) with passed in symbol', function () {
