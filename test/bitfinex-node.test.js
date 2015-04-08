@@ -156,6 +156,41 @@ describe('bitfinex', function () {
             sendSpy.should.have.been.calledWith(params);
         });
 
+        describe('cancelOrder function', function () {
+            it('returns promise called with post(/order/cancel) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+                var params = {order_id: 1};
+
+                bitfinex.cancelOrder(params).should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/order/cancel');
+                sendSpy.should.have.been.calledWith(params);
+            });
+        });
+
+        describe('cancelMultiOrder function', function () {
+            it('returns promise called with post(/order/cancel/multi) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+                var params = {order_id: 1};
+
+                bitfinex.cancelMultiOrder(params).should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/order/cancel/multi');
+                sendSpy.should.have.been.calledWith(params);
+            });
+        });
+
+        describe('cancelAllOrders function', function () {
+            it('returns promise called with post(/order/cancel/all) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+
+                bitfinex.cancellAllOrders().should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/order/cancel/all');
+                sendSpy.should.have.been.called;
+            });
+        });
+
         describe('walletBalances function', function () {
             it('returns promise called with post(url) and set(headers)', function () {
                 var postSpy = sandbox.spy(request, 'post');
