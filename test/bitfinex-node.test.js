@@ -315,6 +315,93 @@ describe('bitfinex', function () {
             });
         });
 
+        describe('newOffer function', function () {
+            it('returns promise called with post(/offer/new) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+                var params = {
+                    currency: 'BTC',
+                    amount: (new Date().getTime()),
+                    rate: 1,
+                    period: 1,
+                    directions: 'lend'
+                };
+
+                bitfinex.newOffer(params).should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/offer/new');
+                sendSpy.should.have.been.calledWith(params);
+            });
+        });
+
+        describe('cancelOffer function', function () {
+            it('returns promise called with post(/offer/cancel) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+                var params = {offer_id: 1};
+
+                bitfinex.cancelOffer(params).should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/offer/cancel');
+                sendSpy.should.have.been.calledWith(params);
+            });
+        });
+
+        describe('offerStatus function', function () {
+            it('returns promise called with post(/offer/status) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+                var params = {offer_id: 1};
+
+                bitfinex.offerStatus(params).should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/offer/status');
+                sendSpy.should.have.been.calledWith(params);
+            });
+        });
+
+        describe('activeOffers function', function () {
+            it('returns promise called with post(/offers) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+
+                bitfinex.activeOffers().should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/offers');
+                sendSpy.should.have.been.called;
+            });
+        });
+
+        describe('activeCredits function', function () {
+            it('returns promise called with post(/credits) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+
+                bitfinex.activeCredits().should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/credits');
+                sendSpy.should.have.been.called;
+            });
+        });
+
+        describe('activeSwaps function', function () {
+            it('returns promise called with post(/taken_swaps) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+
+                bitfinex.activeSwaps().should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/taken_swaps');
+                sendSpy.should.have.been.called;
+            });
+        });
+
+        describe('closeSwap function', function () {
+            it('returns promise called with post(/swap/close) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+                var params = {swap_id: 1};
+
+                bitfinex.closeSwap(params).should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/swap/close');
+                sendSpy.should.have.been.calledWith(params);
+            });
+        });
+
         describe('walletBalances function', function () {
             it('returns promise called with post(url) and set(headers)', function () {
                 var postSpy = sandbox.spy(request, 'post');
@@ -323,6 +410,45 @@ describe('bitfinex', function () {
                 bitfinex.walletBalances().should.have.property('then');
                 postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/balances');
                 setSpy.should.have.been.called;
+            });
+        });
+
+        describe('accountInfo function', function () {
+            it('returns promise called with post(/account_infos) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+                var params = {
+                    pairs: 'some_pair',
+                    maker_fees: 1,
+                    taker_fees: 1
+                };
+
+                bitfinex.accountInfo(params).should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/account_infos');
+                sendSpy.should.have.been.calledWith(params);
+            });
+        });
+
+        describe('marginInfo function', function () {
+            it('returns promise called with post(/margin_infos) with passed in valid params', function () {
+                var postSpy = sandbox.spy(request, 'post');
+                var sendSpy = sandbox.spy(request.Request.prototype, 'send');
+                var params = {
+                    margin_balance: 1,
+                    unrealized_pl: 1,
+                    unrealized_swap: 1,
+                    net_value: 1,
+                    required_margin: 1,
+                    margin_limits: 1,
+                    on_pair: 1,
+                    initial_margin: 1,
+                    tradable_balance: 1,
+                    margin_requirements: 1
+                };
+
+                bitfinex.marginInfo(params).should.have.property('then');
+                postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/margin_infos');
+                sendSpy.should.have.been.calledWith(params);
             });
         });
 
