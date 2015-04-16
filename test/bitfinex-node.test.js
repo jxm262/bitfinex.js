@@ -119,7 +119,7 @@ describe('bitfinex', function () {
                 exchange: 'bitfinex',
                 side: 'buy',
                 type: 'exchange limit',
-                isHidden: true
+                is_hidden: true
             }
 
             bitfinex.newOrder(params).should.have.property('then');
@@ -173,7 +173,7 @@ describe('bitfinex', function () {
         it('returns promise called with post(/order/cancel/multi) with passed in valid params', function () {
             var postSpy = sandbox.spy(request, 'post');
             var sendSpy = sandbox.spy(request.Request.prototype, 'send');
-            var params = {order_id: 1};
+            var params = {order_ids: [1]};
 
             bitfinex.cancelMultiOrder(params).should.have.property('then');
             postSpy.should.have.been.calledWith('https://api.bitfinex.com/v1/order/cancel/multi');
@@ -325,7 +325,7 @@ describe('bitfinex', function () {
                 amount: (new Date().getTime()),
                 rate: 1,
                 period: 1,
-                directions: 'lend'
+                direction: 'lend'
             };
 
             bitfinex.newOffer(params).should.have.property('then');
@@ -441,7 +441,7 @@ describe('bitfinex', function () {
                 net_value: 1,
                 required_margin: 1,
                 margin_limits: 1,
-                on_pair: 1,
+                on_pair: '1',
                 initial_margin: 1,
                 tradable_balance: 1,
                 margin_requirements: 1
