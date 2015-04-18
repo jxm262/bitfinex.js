@@ -13,7 +13,7 @@ describe('bitfinex', function () {
     var bitfinex;
 
     before(function () {
-        bitfinex = new Bitfinex('fakeTestKey', 'fakeTestSecret');
+        bitfinex = new Bitfinex({key: 'fakeTestKey', secret: 'fakeTestSecret'});
     });
 
     beforeEach(function () {
