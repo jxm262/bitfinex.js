@@ -1,14 +1,14 @@
 {
-  "name": "bitfinex-node",
-  "version": "1.0.0",
+  "name": "bitfinex.js",
+  "version": "0.0.1",
   "description": "A promise based Node.js wrapper for the Bitfinex exchange api",
-  "main": "lib/bitfinex-node.js",
+  "main": "lib/bitfinex.js",
   "scripts": {
     "test": "mocha test -R spec"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jxm262/bitfinex-node.git"
+    "url": "https://github.com/jxm262/bitfinex.js.git"
   },
   "keywords": [
     "bitfinex",
@@ -20,9 +20,9 @@
   "author": "Justin Maat <jxm262@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jxm262/bitfinex-node/issues"
+    "url": "https://github.com/jxm262/bitfinex.js/issues"
   },
-  "homepage": "https://github.com/jxm262/bitfinex-node",
+  "homepage": "https://github.com/jxm262/bitfinex.js",
   "devDependencies": {
     "chai": "^2.1.2",
     "mocha": "^2.2.1",

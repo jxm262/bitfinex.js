@@ -1,4 +1,4 @@
-bitfinex-node  [![Build Status](https://travis-ci.org/jxm262/bitfinex-node.svg?branch=master)](https://travis-ci.org/jxm262/bitfinex-node)
+bitfinex.js  [![Build Status](https://travis-ci.org/jxm262/bitfinex.js.svg?branch=master)](https://travis-ci.org/jxm262/bitfinex.js)
 =============
 A Node.js wrapper for the Bitfinex exchange api
 
@@ -10,7 +10,7 @@ This is a complete port of the Bitfinex web api - in Node.js
 
 The source is available for download from npm or here on github (master branch)
 
-    npm install bitfinex-node
+    npm install bitfinex.js
 
 #### Quick Examples    
 
