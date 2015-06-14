@@ -1,4 +1,4 @@
-var Bitfinex = require('../lib/bitfinex-node')
+var Bitfinex = require('../lib/bitfinex')
     , request = require('blueagent')
     , sinon = require('sinon')
     , chai = require('chai')
