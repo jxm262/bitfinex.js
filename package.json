@@ -1,6 +1,6 @@
 {
   "name": "bitfinex.js",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A promise based Node.js wrapper for the Bitfinex exchange api",
   "main": "lib/bitfinex.js",
   "scripts": {
